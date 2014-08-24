@@ -4,6 +4,9 @@ using namespace std;
 
 HTTPServer* server;
 
+/*
+信号处理回调函数，正常情况应该打印coredump信息
+*/
 void signalHandler(int signo)
 {
 	switch(signo)
@@ -41,7 +44,10 @@ int main(int argc, char** argv)
 	serverConfig.Init();
 
 	HTTPServer os(serverConfig);
+	//全局变量
 	server = &os;
+	//信号处理
 	mapSignalHandlers();
+	//启动服务
 	return os.Start();
 }
